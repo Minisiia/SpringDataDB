@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Heroes With Some Weapon</title>
+</head>
+<body>
+<h2>Heroes With <span th:text="${#request.getParameter('myWeapon')}">myWeapon</span></h2>
+<div th:each="genshinHero : ${weaponList}">
+  <a th:href="@{/genshin-heroes/{id}(id=${genshinHero.getId()})}"
+     th:text="${genshinHero.getName() + ', ' + genshinHero.getElement()}">user</a>
+</body>
+</html>
