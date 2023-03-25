@@ -9,20 +9,16 @@
     <a th:href="@{/genshin-regions/{id}(id=${reg.getId()})}"
        th:text="${reg.getName() + ', ' + reg.getLocation()}">user</a>
 </div>
-
 <br/>
 <hr/>
-
 <a href="/genshin-regions/new">Create new genshin region</a>
-
-
 <br/>
 <hr/>
 
-<p>Find some heroes from some part of Teyvat</p>
+<h4>Find some heroes from some part of Teyvat</h4>
 <form th:method="post" th:action="@{/genshin-regions/my-form}">
     <label for="myVariable">Enter location: </label>
-    <input type="text" th:value="${myVariable}" id="myVariable" name="myVariable"/>
+    <input type="text" th:value="${myVariable}" id="myVariable" name="myVariable" placeholder="Eastern Teyvat"/>
     <br/>
     <input type="submit" value="find!"/>
 </form>
