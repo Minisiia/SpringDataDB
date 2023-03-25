@@ -24,8 +24,10 @@ public class GenshinHeroesController {
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("heroes", genshinHeroesService.findAll());
+
         return "genshin-heroes/index";
     }
+
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
@@ -38,17 +40,48 @@ public class GenshinHeroesController {
         return "genshin-heroes/new";
     }
 
-    @GetMapping("/heroes-with-some-weapon")
-    public String heroesFromTeyvat(@RequestParam("myWeapon") String myWeapon, Model model) {
-        model.addAttribute("weaponList", genshinHeroesService.getGenshinHeroesWithSomeWeapon(myWeapon));
-        return "genshin-heroes/heroes-with-some-weapon";
-    }
 
     @PostMapping("/my-form")
     public String findWeapon(@RequestParam("myWeapon") String myWeapon, Model model) {
         model.addAttribute("myWeapon", myWeapon);
         model.addAttribute("weaponList", genshinHeroesService.getGenshinHeroesWithSomeWeapon(myWeapon));
-        return "redirect:/genshin-heroes/heroes-with-some-weapon";
+        return "redirect:/genshin-heroes/index";
+    }
+
+    @GetMapping("/index")
+    public String index(@RequestParam(value = "myName", required = false) String myName,
+                        @RequestParam(value = "myWeapon", required = false) String myWeapon,
+                        @RequestParam(value = "myRarity", required = false) Integer myRarity,
+                        Model model) {
+        model.addAttribute("heroes", genshinHeroesService.findAll());
+        model.addAttribute("heroesByNameList", genshinHeroesService.findByName(myName));
+        model.addAttribute("weaponList", genshinHeroesService.getGenshinHeroesWithSomeWeapon(myWeapon));
+        model.addAttribute("heroesByRarityList", genshinHeroesService.findByRarity(myRarity));
+        return "genshin-heroes/index";
+    }
+
+    @PostMapping("/find-heroes-by-name")
+    public String findByName(@RequestParam("myName") String myName, Model model) {
+        model.addAttribute("myName", myName);
+        model.addAttribute("heroesByNameList", genshinHeroesService.findByName(myName));
+        return "redirect:/genshin-heroes/index";
+    }
+
+    @PostMapping("/find-heroes-by-rarity")
+    public String findByRarity(@RequestParam("myRarity") Integer myRarity, Model model) {
+        model.addAttribute("myRarity", myRarity);
+        model.addAttribute("heroesByRarityList", genshinHeroesService.findByRarity(myRarity));
+        return "redirect:/genshin-heroes/index";
+    }
+
+    @PostMapping("/update-hero-name-by-id")
+    public String updateHeroNameById(@RequestParam("myUpdateName") String myUpdateName,
+                                     @RequestParam("myUpdateId") int myUpdateId,
+                                     Model model) {
+        model.addAttribute("myUpdateName", myUpdateName);
+        model.addAttribute("myUpdateId", myUpdateId);
+        genshinHeroesService.updateHeroNameById(myUpdateId, myUpdateName);
+        return "redirect:/genshin-heroes/index";
     }
 
     @PostMapping()
@@ -83,5 +116,10 @@ public class GenshinHeroesController {
         return "redirect:/genshin-heroes";
     }
 
+    @PostMapping("/delete-by-name")
+    public String deleteByName(@RequestParam("myDeleteName") String myDeleteName) {
+        genshinHeroesService.deleteByName(myDeleteName);
+        return "redirect:/genshin-heroes";
+    }
 
 }

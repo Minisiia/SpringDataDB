@@ -1,17 +1,14 @@
 package database.controllers;
 
-import database.models.GenshinHero;
 import database.models.GenshinRegion;
 import database.services.GenshinRegionsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/genshin-regions")
@@ -41,17 +38,19 @@ public class GenshinRegionsController {
         return "genshin-regionss/new";
     }
 
-    @GetMapping("/heroes-from-teyvat")
-    public String heroesFromTeyvat(@RequestParam("myVariable") String myVariable, Model model) {
-        model.addAttribute("result", genshinRegionsService.getGenshinHeroesNamesFromSomeLocationAndSomeWeapon(myVariable));
-        return "genshin-regionss/heroes-from-teyvat";
+    @GetMapping("/index")
+    public String index(@RequestParam(value = "myVariable", required = false) String myVariable,
+                        Model model) {
+        model.addAttribute("regions", genshinRegionsService.findAll());
+        model.addAttribute("listOfHeroes", genshinRegionsService.getGenshinHeroesNamesFromSomeLocationAndSomeWeapon(myVariable));
+        return "genshin-regionss/index";
     }
 
     @PostMapping("/my-form")
     public String find(@RequestParam("myVariable") String myVariable, Model model) {
         model.addAttribute("myVariable", myVariable);
-        model.addAttribute("result", genshinRegionsService.getGenshinHeroesNamesFromSomeLocationAndSomeWeapon(myVariable));
-        return "redirect:/genshin-regions/heroes-from-teyvat";
+        model.addAttribute("listOfHeroes", genshinRegionsService.getGenshinHeroesNamesFromSomeLocationAndSomeWeapon(myVariable));
+        return "redirect:/genshin-regions/index";
     }
 
 
@@ -62,7 +61,7 @@ public class GenshinRegionsController {
             return "genshin-regionss/new";
 
         genshinRegionsService.save(genshinRegion);
-        return "redirect:/genshin-regionss";
+        return "redirect:/genshin-regions";
     }
 
     @GetMapping("/{id}/edit")
@@ -78,7 +77,7 @@ public class GenshinRegionsController {
             return "genshin-regionss/edit";
 
         genshinRegionsService.update(id, genshinRegion);
-        return "redirect:/genshin-regionss";
+        return "redirect:/genshin-regions";
     }
 
     @DeleteMapping("/{id}")

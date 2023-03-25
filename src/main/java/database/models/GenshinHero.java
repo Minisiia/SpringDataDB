@@ -36,7 +36,7 @@ public class GenshinHero {
 
     @Min(value = 0, message = "Rarity should be 4 or 5")
     @Column(name = "rarity")
-    private int rarity;
+    private Integer rarity;
 
     public int getGenshinRegionId() {
         return genshinRegionId;
@@ -91,11 +91,11 @@ public class GenshinHero {
         this.weapon = weapon;
     }
 
-    public int getRarity() {
+    public Integer getRarity() {
         return rarity;
     }
 
-    public void setRarity(int rarity) {
+    public void setRarity(Integer rarity) {
         this.rarity = rarity;
     }
 

@@ -14,17 +14,78 @@
 <br/>
 <hr/>
 
-<p>Find some heroes with weapon</p>
+<a href="/genshin-heroes/new">Create new genshin hero</a>
+
+
+<br/>
+<hr/>
+
+<p>Find Some Heroes By Name</p>
+<form th:method="post" th:action="@{/genshin-heroes/find-heroes-by-name}">
+    <label for="myName">Enter name: </label>
+    <input type="text" th:value="${myName}" id="myName" name="myName"/>
+    <br/>
+    <input type="submit" value="find!"/>
+</form>
+<br/>
+<div th:if="${heroesByNameList != null}">
+    <div th:each="paramHero : ${heroesByNameList}">
+        <p th:utext="${'Name: <b>' + paramHero.getName() + '</b>, Element: <b>' + paramHero.getElement() + '</b>, Weapon: <b>' + paramHero.getWeapon() + '</b>, Rarity: <b>' + paramHero.getRarity() + '</b>'}"></p>
+    </div>
+</div>
+<hr/>
+
+<p>Find Some Heroes By Rarity</p>
+<form th:method="post" th:action="@{/genshin-heroes/find-heroes-by-rarity}">
+    <label for="myRarity">Enter rarity: </label>
+    <input type="text" th:value="${myRarity}" id="myRarity" name="myRarity"/>
+    <br/>
+    <input type="submit" value="find!"/>
+</form>
+<br/>
+<div th:if="${heroesByRarityList != null}">
+    <div th:each="paramHero : ${heroesByRarityList}">
+        <p th:utext="${'Name: <b>' + paramHero.getName() + '</b>, Element: <b>' + paramHero.getElement() + '</b>, Weapon: <b>' + paramHero.getWeapon() + '</b>, Rarity: <b>' + paramHero.getRarity() + '</b>'}"></p>
+    </div>
+</div>
+<hr/>
+<p>Update Hero's Name By Id</p>
+<form th:method="post" th:action="@{/genshin-heroes/update-hero-name-by-id}">
+    <label for="myUpdateId">Enter id: </label>
+    <input type="text" th:value="${myUpdateId}" id="myUpdateId" name="myUpdateId"/>
+    <br/>
+
+    <label for="myUpdateName">Enter name: </label>
+    <input type="text" th:value="${myUpdateName}" id="myUpdateName" name="myUpdateName"/>
+    <br/>
+    <input type="submit" value="update!"/>
+</form>
+<br/>
+<hr/>
+
+<p>Delete Hero By Name</p>
+<form th:method="post" th:action="@{/genshin-heroes/delete-by-name}">
+    <label for="myDeleteName">Enter name: </label>
+    <input type="text" th:value="${myDeleteName}" id="myDeleteName" name="myDeleteName"/>
+    <br/>
+    <input type="submit" value="delete!"/>
+</form>
+<hr/>
+
+<p>Find Some Heroes With Weapon</p>
 <form th:method="post" th:action="@{/genshin-heroes/my-form}">
     <label for="myWeapon">Enter weapon: </label>
     <input type="text" th:value="${myWeapon}" id="myWeapon" name="myWeapon"/>
     <br/>
     <input type="submit" value="find!"/>
 </form>
-
 <br/>
+<div th:if="${weaponList != null}">
+    <div th:each="paramHero : ${weaponList}">
+        <p th:utext="${'Name: <b>' + paramHero.getName() + '</b>, Element: <b>' + paramHero.getElement() + '</b>, Weapon: <b>' + paramHero.getWeapon() + '</b>, Rarity: <b>' + paramHero.getRarity() + '</b>'}"></p>
+    </div>
+</div>
 <hr/>
-
 
 
 </body>

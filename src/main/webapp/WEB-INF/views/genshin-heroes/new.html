@@ -21,7 +21,8 @@
     <br/>
     <label for="genshinRegionId">Enter region id: </label>
     <input type="text" th:field="*{genshinRegionId}" id="genshinRegionId"/>
-    <div style="color:red" th:if="${#fields.hasErrors('genshinRegionId')}" th:errors="*{genshinRegionId}">Weapon Error</div>
+    <div style="color:red" th:if="${#fields.hasErrors('genshinRegionId')}" th:errors="*{genshinRegionId}">Weapon Error
+    </div>
     <br/>
     <label for="rarity">Enter rarity: </label>
     <input type="text" th:field="*{rarity}" id="rarity"/>

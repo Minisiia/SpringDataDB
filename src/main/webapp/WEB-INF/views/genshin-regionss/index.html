@@ -15,6 +15,7 @@
 
 <a href="/genshin-regions/new">Create new genshin region</a>
 
+
 <br/>
 <hr/>
 
@@ -25,6 +26,12 @@
     <br/>
     <input type="submit" value="find!"/>
 </form>
-
+<br/>
+<div th:if="${listOfHeroes != null}">
+    <div th:each="paramHero : ${listOfHeroes}">
+        <p th:text="${paramHero}"/>
+    </div>
+</div>
+<hr/>
 </body>
 </html>
