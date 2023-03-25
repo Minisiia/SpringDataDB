@@ -13,8 +13,8 @@ import java.util.List;
 public interface GenshinHeroesRepository extends JpaRepository<GenshinHero, Integer> {
 
     @Transactional
-    @Query(value = "SELECT * FROM genshin_heroes WHERE weapon = ?", nativeQuery = true)
-    List<GenshinHero> getGenshinHeroesWithSomeWeapon(String weapon);
+    @Query(value = "SELECT genshin_heroes.name FROM genshin_heroes JOIN genshin_regions ON genshin_regions.id = genshin_heroes.genshin_region_id WHERE genshin_regions.location=? AND genshin_heroes.weapon = ?", nativeQuery = true)
+    List<String> getGenshinHeroesWithSomeWeaponFromSomeRegion(String location, String weapon);
 
     List<GenshinHero> findByName(String name);
 

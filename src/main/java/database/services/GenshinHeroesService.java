@@ -66,7 +66,7 @@ public class GenshinHeroesService {
     }
 
     @Transactional
-    public List<GenshinHero> getGenshinHeroesWithSomeWeapon(String weapon) {
-        return genshinHeroesRepository.getGenshinHeroesWithSomeWeapon(weapon);
+    public List<String> getGenshinHeroesWithSomeWeapon(String location, String weapon) {
+        return genshinHeroesRepository.getGenshinHeroesWithSomeWeaponFromSomeRegion(location, weapon);
     }
 }

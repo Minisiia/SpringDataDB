@@ -72,8 +72,11 @@
 </form>
 <hr/>
 
-<p>Find Some Heroes With Weapon</p>
+<p>Find Some Heroes Names With Weapon From Some Region</p>
 <form th:method="post" th:action="@{/genshin-heroes/my-form}">
+    <label for="myLocation">Enter location: </label>
+    <input type="text" th:value="${myLocation}" id="myLocation" name="myLocation"/>
+    <br/>
     <label for="myWeapon">Enter weapon: </label>
     <input type="text" th:value="${myWeapon}" id="myWeapon" name="myWeapon"/>
     <br/>
@@ -82,7 +85,7 @@
 <br/>
 <div th:if="${weaponList != null}">
     <div th:each="paramHero : ${weaponList}">
-        <p th:utext="${'Name: <b>' + paramHero.getName() + '</b>, Element: <b>' + paramHero.getElement() + '</b>, Weapon: <b>' + paramHero.getWeapon() + '</b>, Rarity: <b>' + paramHero.getRarity() + '</b>'}"></p>
+        <p th:text="${paramHero}"></p>
     </div>
 </div>
 <hr/>
