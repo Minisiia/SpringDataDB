@@ -1,8 +1,3 @@
-DROP DATABASE genshin;
-USE genshin;
-DROP TABLE genshin_regions;
-DROP TABLE genshin_heroes;
-
 CREATE TABLE genshin_regions (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
