@@ -64,7 +64,8 @@ public class GenshinHeroesController {
     }
 
     @PostMapping("/find-heroes-by-name")
-    public String findByName(@RequestParam("myName") String myName, Model model) {
+    public String findByName(@RequestParam("myName") String myName,
+                             Model model) {
         model.addAttribute("myName", myName);
         model.addAttribute("heroesByNameList", genshinHeroesService.findByName(myName));
         return "redirect:/genshin-heroes/index";

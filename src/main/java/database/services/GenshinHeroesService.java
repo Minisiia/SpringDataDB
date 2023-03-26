@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class GenshinHeroesService {
 
     private final GenshinHeroesRepository genshinHeroesRepository;
@@ -39,33 +39,27 @@ public class GenshinHeroesService {
         return findByRarityList;
     }
 
-    @Transactional
     public void save(GenshinHero genshinHero) {
         genshinHeroesRepository.save(genshinHero);
     }
 
-    @Transactional
     public void update(int id, GenshinHero updatedGenshinHero) {
         updatedGenshinHero.setId(id);
         genshinHeroesRepository.save(updatedGenshinHero);
     }
 
-    @Transactional
     public void updateHeroNameById(int id, String name) {
         genshinHeroesRepository.updateHeroNameById(name, id);
     }
 
-    @Transactional
     public void delete(int id) {
         genshinHeroesRepository.deleteById(id);
     }
 
-    @Transactional
     public void deleteByName(String name) {
         genshinHeroesRepository.deleteByName(name);
     }
 
-    @Transactional
     public List<String> getGenshinHeroesWithSomeWeapon(String location, String weapon) {
         return genshinHeroesRepository.getGenshinHeroesWithSomeWeaponFromSomeRegion(location, weapon);
     }

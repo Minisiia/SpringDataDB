@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class GenshinRegionsService {
 
     private final GenshinRegionsRepository genshinRegionsRepository;
@@ -19,7 +19,6 @@ public class GenshinRegionsService {
     public GenshinRegionsService(GenshinRegionsRepository genshinRegionsRepository) {
         this.genshinRegionsRepository = genshinRegionsRepository;
     }
-
 
     public List<GenshinRegion> findAll() {
         return genshinRegionsRepository.findAll();
@@ -30,23 +29,19 @@ public class GenshinRegionsService {
         return foundRegion.orElse(null);
     }
 
-    @Transactional
     public void save(GenshinRegion genshinRegion) {
         genshinRegionsRepository.save(genshinRegion);
     }
 
-    @Transactional
     public void update(int id, GenshinRegion genshinRegion) {
         genshinRegion.setId(id);
         genshinRegionsRepository.save(genshinRegion);
     }
 
-    @Transactional
     public void delete(int id) {
         genshinRegionsRepository.deleteById(id);
     }
 
-    @Transactional
     public List<String> getGenshinHeroesNamesFromSomeLocationAndSomeWeapon(String location) {
         return genshinRegionsRepository.getGenshinHeroesNamesFromSomeLocationAndSomeWeapon(location);
     }
